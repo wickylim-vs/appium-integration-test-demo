@@ -26,8 +26,14 @@ jobs:
   run-integration-test:
     runs-on: ubuntu-latest
     needs: build-ipa
+    env:
+      BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      BROWSERSTACK_APP_ID: ${{ needs.build-ipa.outputs.browserstack_app_url }}
     steps:
-      - run: echo ${{needs.build-ipa.outputs.browserstack_app_url}}
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: node appium/index.js
 
 
 

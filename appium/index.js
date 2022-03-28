@@ -28,15 +28,15 @@ const iosOpts = {
 };
 
 const iosOptsBS = {
-  user: process.env.BROWSERSTACK_USERNAME || 'wickylim_Igr9mS',
-  key: process.env.BROWSERSTACK_ACCESS_KEY || 'xzDLazjHqResQSGp2E3C',
+  user: process.env.BROWSERSTACK_USERNAME,
+  key: process.env.BROWSERSTACK_ACCESS_KEY,
   capabilities: {
     project: "Testing Appium iOS Project",
     build: 'Webdriverio iOS',
     name: "Testing",
     device: 'iPhone 11 Pro',
     os_version: "13",
-    app: process.env.BROWSERSTACK_APP_ID || "bs://ba9c27513028d68c23449991da7d92433b9609a1",
+    app: process.env.BROWSERSTACK_APP_ID,
     'browserstack.debug': true
   }
 };
