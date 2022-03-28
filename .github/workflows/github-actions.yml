@@ -1,7 +1,7 @@
 name: Appium Integration Test Demo
 on: [push, pull_request]
 jobs:
-  Build ipa:
+  Build-ipa:
     runs-on: macos-latest
     steps:
       - name: Check out repository code
