@@ -22,7 +22,7 @@
 
 ### Build .ipa file (For BrowserStack upload)
 1. From Flutter project root directory
-`flutter build ios --release`
+`flutter build ios --release --no-codesign`
 2. `mkdir Payload`
 3. `cp -r build/ios/iphoneos/Runner.app Payload/`
 4. `zip -r Payload.ipa Payload/`
@@ -32,3 +32,12 @@
 
 ### Running Appium test on BrowserStack
 1. https://www.browserstack.com/docs/app-automate/appium/getting-started/nodejs/webdriverio#iOS
+
+### Writing GitHub Action Script
+1. GitHub action script format: https://docs.github.com/en/actions/quickstart
+2. Flutter GitHub action: https://github.com/marketplace/actions/flutter-action
+3. Build ipa: Refer to Build ipa steps above
+4. Upload ipa: Refer to Running Appium test steps above
+5. Set output for GitHub Action job: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-defining-outputs-for-a-job
+6. GitHub Actions job's environment variables: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idenv
+7. Refer to `create-and-upload-ipa` and `run-integration-test-for-ios` jobs in [github-actions.yml file](.github/workflows/github-actions.yml)
