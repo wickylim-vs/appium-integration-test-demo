@@ -27,12 +27,12 @@ jobs:
           echo "::set-output name=app_url::${app_url}"
   run-integration-test-for-ios:
     runs-on: ubuntu-latest
-    needs: build-ipa
+    needs: create-and-upload-ipa
     env:
       RUN_ON_BROWSERSTACK: true
       BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
       BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-      BROWSERSTACK_APP_ID: ${{ needs.build-ipa.outputs.browserstack_app_url }}
+      BROWSERSTACK_APP_ID: ${{ needs.create-and-upload-ipa.outputs.browserstack_app_url }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
