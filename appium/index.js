@@ -42,7 +42,7 @@ const iosOptsBS = {
 };
 
 async function main () {
-  const client = await wdio.remote(iosOptsBS);
+  const client = await wdio.remote(process.env.RUN_ON_BROWSERSTACK ? iosOptsBS : iosOpts);
   client.setImplicitTimeout(5000);
 
   const increment = await client.$('~Increment');
