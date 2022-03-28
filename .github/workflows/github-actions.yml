@@ -33,7 +33,10 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - run: node appium/index.js
+      - run: |
+          cd appium
+          npm i
+          node index.js
 
 
 
