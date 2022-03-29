@@ -1,20 +1,6 @@
 const wdio = require("webdriverio");
 const assert = require("assert");
 
-const androidOpts = {
-  path: '/wd/hub',
-  port: 4723,
-  capabilities: {
-    platformName: "Android",
-    platformVersion: "8",
-    deviceName: "Android Emulator",
-    app: "/path/to/the/downloaded/ApiDemos-debug.apk",
-    appPackage: "io.appium.android.apis",
-    appActivity: ".view.TextFields",
-    automationName: "UiAutomator2"
-  }
-};
-
 const iosOpts = {
   path: '/wd/hub',
   port: 4723,
@@ -32,8 +18,8 @@ const iosOptsBS = {
   key: process.env.BROWSERSTACK_ACCESS_KEY,
   capabilities: {
     project: "Testing Appium iOS Project",
-    build: 'Webdriverio iOS',
-    name: "Testing",
+    build: 'Appium Demo iOS',
+    name: "iOS Test",
     device: 'iPhone 11 Pro',
     os_version: "13",
     app: process.env.BROWSERSTACK_APP_ID,
@@ -52,7 +38,7 @@ async function main () {
   const count = await counter.getAttribute("value");
   assert.equal(count, 1);
 
-  await new Promise(r => setTimeout(r, 10000));
+  await new Promise(r => setTimeout(r, 3000));
 
   await client.deleteSession();
 }
