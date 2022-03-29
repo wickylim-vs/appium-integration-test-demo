@@ -41,3 +41,14 @@
 5. Set output for GitHub Action job: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-defining-outputs-for-a-job
 6. GitHub Actions job's environment variables: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idenv
 7. Refer to `create-and-upload-ipa` and `run-integration-test-for-ios` jobs in [github-actions.yml file](.github/workflows/github-actions.yml)
+
+
+# Appium Integration Test (iOS App)
+
+### Update Appium test script for Android app
+1. Manage Android simulator: https://developer.android.com/studio/run/managing-avds
+2. Build Flutter app for Android
+`flutter build apk --debug`
+3. Set `JAVA_HOME` and `ANDROID_HOME` before starting appium server to test locally: https://discuss.appium.io/t/throwing-error-android-home-is-not-set/21405
+4. Appium Android capabilities reference: https://appium.io/docs/en/writing-running-appium/caps/#appium-desired-capabilities
+5. BrowserStack Android capabilities reference: https://www.browserstack.com/docs/app-automate/appium/getting-started/nodejs/webdriverio#Android
