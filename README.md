@@ -57,3 +57,12 @@
 
 ### Updating GitHub Action Script to automate Android integration test
 1. For complete Android app CI workflow, refer to `create-and-upload-apk` and `run-integration-test-for-android` jobs in the project's [github-actions.yml file](.github/workflows/github-actions.yml)
+
+
+
+# Continuous Deployment
+
+### Prepare fastlane for Play Store and App Store Deployment
+1. Continuous deployment for Flutter app: https://docs.flutter.dev/deployment/cd
+    1. Changing package name: https://www.flutterbeads.com/change-package-name-in-flutter/
+    2. For Android Play Store, manual upload is required once: https://developer.android.com/studio/publish/upload-bundle
