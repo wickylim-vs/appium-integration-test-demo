@@ -1,0 +1,1 @@
+A Flutter demo app used to demo mobile app CICD pipeline
