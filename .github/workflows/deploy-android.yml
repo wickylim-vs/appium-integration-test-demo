@@ -1,0 +1,15 @@
+name: Deploy to Play Store
+on: workflow_dispatch
+jobs:
+  get-commit-sha:
+    name: Get GIT commit sha
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  
+      - name: "Echo commit sha"
+        run: |
+          echo "$GITHUB_SHA"
+          echo $(git rev-parse --short "$GITHUB_SHA")
+          echo $(git rev-parse --short HEAD)
