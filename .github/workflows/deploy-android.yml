@@ -8,8 +8,8 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  
+          ref: ${{github.ref}}
       - name: "Echo commit sha"
         run: |
-          echo "$GITHUB_SHA"
           echo $(git rev-parse --short "$GITHUB_SHA")
-          echo $(git rev-parse --short HEAD)
+          echo $(github.ref)
