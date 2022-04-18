@@ -21,9 +21,22 @@ platform :android do
     gradle(task: "test")
   end
 
+  desc "Increment Internal Test Build's Build Number"
+  lane :increment_build_internal do
+    previous_build_number = google_play_track_version_codes(
+      package_name: 'com.wickylim.myapp',
+      track: "internal",
+      # json_key_data: ENV['PLAY_STORE_CONFIG_JSON'], # To test fastlane locally during dev, comment this line and use 'json_key_file' in Appfile
+    )[0]
+
+    current_build_number = previous_build_number + 1
+    sh("echo BUILD_NUMBER=#{current_build_number} >> $GITHUB_ENV")
+  end
+
   desc "Submit a new Internal Test Build to PlayStore"
   lane :internal do
     upload_to_play_store(
+      package_name: 'com.wickylim.myapp',
       track: 'internal',
       aab: '../build/app/outputs/bundle/release/app-release.aab',
       # json_key_data: ENV['PLAY_STORE_CONFIG_JSON'], # To test fastlane locally during dev, comment this line and use 'json_key_file' in Appfile

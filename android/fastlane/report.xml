@@ -5,12 +5,17 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000711">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000478">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: upload_to_play_store" time="54.444068">
+      <testcase classname="fastlane.lanes" name="1: google_play_track_version_codes" time="2.935623">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: echo BUILD_NUMBER=6 &gt;&gt; test.txt" time="0.016884">
         
       </testcase>
     

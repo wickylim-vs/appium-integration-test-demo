@@ -23,6 +23,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Runs all the tests
 
+### android increment_build_internal
+
+```sh
+[bundle exec] fastlane android increment_build_internal
+```
+
+Increment Internal Test Build's Build Number
+
 ### android internal
 
 ```sh
