@@ -2,7 +2,7 @@ name: Deploy to Play Store
 on: workflow_dispatch
 jobs:
   get-commit-sha:
-    name: Get GIT commit sha
+    name: Deploy to Play Store Internal Test release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,9 +22,6 @@ jobs:
           channel: 'stable'
       - run: flutter pub get
 
-      - name: Build Android appbundle (.aab)
-        run: flutter build appbundle --build-number $(git rev-parse --short "$GITHUB_SHA")
-
       # Setup Ruby, Bundler, and Gemfile dependencies
       - name: Setup Fastlane
         uses: ruby/setup-ruby@v1
@@ -32,6 +29,15 @@ jobs:
           ruby-version: '3.1.1'
           bundler-cache: true
           working-directory: android
+
+      # Get Andorid app incremented build number
+      - run: bundle exec fastlane increment_build_internal
+        env:
+          PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
+        working-directory: android
+
+      - name: Build Android appbundle (.aab)
+        run: flutter build appbundle --build-number $(git rev-parse --short "${{ env.BUILD_NUMBER }}")
 
       - name: Configure Keystore
         run: |
