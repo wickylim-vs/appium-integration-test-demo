@@ -37,7 +37,7 @@ jobs:
         working-directory: android
 
       - name: Build Android appbundle (.aab)
-        run: flutter build appbundle --build-number $(git rev-parse --short "${{ env.BUILD_NUMBER }}")
+        run: flutter build appbundle --build-number "${{ env.BUILD_NUMBER }}"
 
       - name: Configure Keystore
         run: |
