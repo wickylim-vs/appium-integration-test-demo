@@ -30,15 +30,7 @@ jobs:
           bundler-cache: true
           working-directory: android
 
-      # Get Andorid app incremented build number
-      - run: bundle exec fastlane increment_build_internal
-        env:
-          PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
-        working-directory: android
-
-      - name: Build Android appbundle (.aab)
-        run: flutter build appbundle --build-number "${{ env.BUILD_NUMBER }}"
-
+      # Setup keystore and key.properties file for app signing
       - name: Configure Keystore
         run: |
           echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/upload-keystore.jks
@@ -52,6 +44,16 @@ jobs:
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
         working-directory: android
+
+      # Get Andorid app incremented build number
+      - run: bundle exec fastlane increment_build_internal
+        env:
+          PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
+        working-directory: android
+
+      # Build Android appbundle
+      - name: Build Android appbundle (.aab)
+        run: flutter build appbundle --build-number "${{ env.BUILD_NUMBER }}"
 
       # Build and deploy with Fastlane to internal test release
       - run: bundle exec fastlane internal
