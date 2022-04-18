@@ -26,7 +26,7 @@ platform :android do
     previous_build_number = google_play_track_version_codes(
       package_name: 'com.wickylim.myapp',
       track: "internal",
-      # json_key_data: ENV['PLAY_STORE_CONFIG_JSON'], # To test fastlane locally during dev, comment this line and use 'json_key_file' in Appfile
+      json_key_data: ENV['PLAY_STORE_CONFIG_JSON'], # To test fastlane locally during dev, comment this line and use 'json_key_file' in Appfile
     )[0]
 
     current_build_number = previous_build_number + 1
@@ -39,7 +39,7 @@ platform :android do
       package_name: 'com.wickylim.myapp',
       track: 'internal',
       aab: '../build/app/outputs/bundle/release/app-release.aab',
-      # json_key_data: ENV['PLAY_STORE_CONFIG_JSON'], # To test fastlane locally during dev, comment this line and use 'json_key_file' in Appfile
+      json_key_data: ENV['PLAY_STORE_CONFIG_JSON'], # To test fastlane locally during dev, comment this line and use 'json_key_file' in Appfile
     )
   end
 end
