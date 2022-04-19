@@ -1,11 +1,58 @@
 name: Deploy to Play Store
 on: workflow_dispatch
 jobs:
-  get-commit-sha:
-    name: SonarQube Scan
+  deploy-to-playstore:
+    name: Deploy to Play Store Internal Test release
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo $GITHUB_SHA
-          echo $(git rev-parse --short "$GITHUB_SHA")
-          echo $(git rev-parse --short HEAD)
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  
+          ref: ${{github.ref}}
+
+      - name: Use flutter CLI
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '2.10.3'
+          channel: 'stable'
+      - run: flutter pub get
+
+      # Setup Ruby, Bundler, and Gemfile dependencies
+      - name: Setup Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.1'
+          bundler-cache: true
+          working-directory: android
+
+      # Setup keystore and key.properties file for app signing
+      - name: Configure Keystore
+        run: |
+          echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/upload-keystore.jks
+          echo "storeFile=upload-keystore.jks" >> key.properties
+          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> key.properties
+          echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> key.properties
+          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> key.properties
+        env:
+          PLAY_STORE_UPLOAD_KEY: ${{ secrets.PLAY_STORE_UPLOAD_KEY }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+        working-directory: android
+
+      # Get Andorid app incremented build number
+      - run: bundle exec fastlane increment_build_internal
+        env:
+          PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
+        working-directory: android
+
+      # Build Android appbundle
+      - name: Build Android appbundle (.aab)
+        run: flutter build appbundle --build-number "${{ env.BUILD_NUMBER }}"
+
+      # Build and deploy with Fastlane to internal test release
+      - run: bundle exec fastlane internal
+        env:
+          PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
+        working-directory: android
