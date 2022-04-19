@@ -40,7 +40,7 @@
 4. Upload ipa: Refer to Running Appium test steps above
 5. Reference for setting output on GitHub Action job: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-defining-outputs-for-a-job
 6. Reference for using GitHub Actions job's environment variables: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idenv
-7. For complete iOS app CI workflow, refer to `create-and-upload-ipa` and `run-integration-test-for-ios` jobs in the project's [github-actions.yml file](.github/workflows/github-actions.yml)
+7. For complete iOS app CI workflow, refer to `create-and-upload-ipa` and `run-integration-test-for-ios` jobs in the project's [integration-test.yml file](.github/workflows/integration-test.yml)
 
 
 # Appium Integration Test (Android App)
@@ -56,7 +56,7 @@
 6. BrowserStack Android capabilities reference: https://www.browserstack.com/docs/app-automate/appium/getting-started/nodejs/webdriverio#Android
 
 ### Updating GitHub Action Script to automate Android integration test
-1. For complete Android app CI workflow, refer to `create-and-upload-apk` and `run-integration-test-for-android` jobs in the project's [github-actions.yml file](.github/workflows/github-actions.yml)
+1. For complete Android app CI workflow, refer to `create-and-upload-apk` and `run-integration-test-for-android` jobs in the project's [integration-test.yml file](.github/workflows/integration-test.yml)
 
 
 
@@ -66,3 +66,7 @@
 1. Continuous deployment for Flutter app: https://docs.flutter.dev/deployment/cd
     1. Changing package name: https://www.flutterbeads.com/change-package-name-in-flutter/
     2. For Android Play Store, manual upload is required once: https://developer.android.com/studio/publish/upload-bundle
+    3. Get version number of Android app from Play Store: https://docs.fastlane.tools/actions/google_play_track_version_codes/
+    4. Get version number of iOS app from Test Flight: https://docs.fastlane.tools/actions/latest_testflight_build_number/
+    5. Writing to GitHub Action environment variables: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
+2. For complete Android app automated deployment workflow, refer to the project's [deploy-android.yml file](.github/workflows/deploy-android.yml) and [Fastfile](android/fastlane/Fastfile)

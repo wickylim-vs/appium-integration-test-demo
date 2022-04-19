@@ -1,7 +1,7 @@
 name: Deploy to Play Store
 on: workflow_dispatch
 jobs:
-  get-commit-sha:
+  deploy-to-playstore:
     name: Deploy to Play Store Internal Test release
     runs-on: ubuntu-latest
     steps:
@@ -10,10 +10,6 @@ jobs:
         with:
           fetch-depth: 0  
           ref: ${{github.ref}}
-
-      - name: Echo commit sha
-        run: |
-          echo $(git rev-parse --short "$GITHUB_SHA")
 
       - name: Use flutter CLI
         uses: subosito/flutter-action@v2
