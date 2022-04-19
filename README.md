@@ -59,7 +59,6 @@
 1. For complete Android app CI workflow, refer to `create-and-upload-apk` and `run-integration-test-for-android` jobs in the project's [integration-test.yml file](.github/workflows/integration-test.yml)
 
 
-
 # Continuous Deployment
 
 ### Prepare fastlane for Play Store and App Store Deployment
